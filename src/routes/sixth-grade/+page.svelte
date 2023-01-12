@@ -8,8 +8,6 @@
 		/* { id: 2, title: 'Oberstufe', large: 'S2', active: false } */
 	];
 
-
-
 	$: idError = id !== null && id < 1000;
 	$: birthDateError = birthDate !== null && new Date().getTime() < new Date(birthDate).getTime();
 
@@ -23,6 +21,13 @@
 		if (filtered && filtered[0].active) {
 			selected = choice;
 		}
+	}
+
+	$: submitEnabled = id && birthDate && !(idError || birthDateError);
+
+	function submit() {
+		if (!submitEnabled) return;
+		alert('TODO');
 	}
 
 	$: console.log(new Date(birthDate));
@@ -47,7 +52,8 @@
 			class="flex gap-4 w-full mt-8"
 		>
 			<div class="flex flex-col flex-1 gap-1">
-				<label class="text-gray-500 text-sm" class:text-red-400={idError} for="id">Schüler-ID</label>
+				<label class="text-gray-500 text-sm" class:text-red-400={idError} for="id">Schüler-ID</label
+				>
 				<input
 					bind:value={id}
 					class="border-gray-200 border-4 rounded-lg px-2 text-gray-500"
@@ -59,7 +65,9 @@
 				/>
 			</div>
 			<div class="flex flex-col flex-1 gap-1">
-				<label class="text-gray-500 text-sm" class:text-red-400={birthDateError} for="id">Geburtsdatum</label>
+				<label class="text-gray-500 text-sm" class:text-red-400={birthDateError} for="id"
+					>Geburtsdatum</label
+				>
 				<input
 					bind:value={birthDate}
 					class="border-gray-200 border-4 rounded-lg px-2 text-gray-500"
@@ -96,6 +104,11 @@
 				</button>
 			{/each}
 		</div>
+		<button
+			class="mt-8 enabled:bg-indigo-500 bg-gray-400 text-gray-100 px-8 py-2 font-bold uppercase rounded-md"
+			disabled={!submitEnabled}
+			on:click={submit}>Abschicken</button
+		>
 		<p class="mt-16 text-gray-500 font-light">© Nia Schlegel 2023, AGPLv3</p>
 	</div>
 </main>
