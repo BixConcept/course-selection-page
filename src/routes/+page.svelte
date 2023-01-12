@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import Logo from '../assets/logo.svg';
+
 	const choices = [
-		{ id: 0, title: 'Sechste Klasse', large: '6', active: true },
-		{ id: 1, title: 'Neunte Klasse', large: '9', active: true },
-		{ id: 2, title: 'Oberstufe', large: 'S2', active: false }
+		{ id: 0, href: '/sixth-grade', title: 'Sechste Klasse', large: '6', active: true },
+		{ id: 1, href: '/ninth-grade', title: 'Neunte Klasse', large: '9', active: false },
+		/* { id: 2, title: 'Oberstufe', large: 'S2', active: false } */
 	];
 
 	let selected: number | null = null;
@@ -11,22 +14,29 @@
 		const filtered = choices.filter((x) => x.id == choice);
 		if (filtered && filtered[0].active) {
 			selected = choice;
+			goto(filtered[0].href);
 		}
 	}
 </script>
 
-<main class="flex flex-col justify-center items-center w-screen h-screen bg-slate-300">
+<main class="flex flex-col justify-center items-center w-screen h-screen bg-zinc-100 px-8">
+	<div class="flex absolute top-4 items-center gap-2">
+		<div class="w-8 h-8 text-gray-600">
+			<img src={Logo} alt="Gymhaan Logo" />
+		</div>
+		<h1 class="uppercase text-gray-600 ">Gymnasium Haan</h1>
+	</div>
 	<div
-		class="p-12 drop-shadow-2xl bg-white max-w-screen-lg flex items-center justify-center flex-col w-full rounded-2xl"
+		class="p-12 w-[min(800px,90vw)] drop-shadow-2xl bg-white flex items-center justify-center flex-col rounded-2xl "
 	>
 		<h1 class="text-center text-4xl text-indigo-600">Kurswahlen</h1>
 		<h2 class="text-center text-gray-500">Städtisches Gymnasium Haan</h2>
-		<div class="flex gap-4 mt-12">
+		<div class="flex flex-col sm:flex-row gap-4 mt-12 w-full">
 			{#each choices as choice}
 				<button
-					class="flex-1 shadow-lg rounded-md flex flex-col  justify-center p-8 w-72 h-[250px] ring-indigo-600"
+					class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
+					disabled={!choice.active}
 					on:click={() => selectThing(choice.id)}
-					class:ring-2={selected === choice.id}
 				>
 					<h2
 						class="flex-1 text-7xl font-bold "
@@ -48,3 +58,4 @@
 		<p class="mt-16 text-gray-500 font-light">© Nia Schlegel 2023, AGPLv3</p>
 	</div>
 </main>
+
