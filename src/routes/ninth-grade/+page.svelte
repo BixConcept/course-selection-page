@@ -78,7 +78,7 @@
 	<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 w-full">
 		{#each choices as choice}
 			<button
-				class="shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out "
+				class="shadow-lg rounded-md flex flex-col justify-center items-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out "
 				disabled={!choice.active}
 				class:ring-4={selected == choice.id}
 				on:click={() => selectThing(choice.id)}

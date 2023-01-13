@@ -74,7 +74,7 @@
 	<div class="flex flex-col sm:flex-row gap-4 mt-12 w-full">
 		{#each choices as choice}
 			<button
-				class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
+				class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center items-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
 				disabled={!choice.active}
 				class:ring-4={selected == choice.id}
 				on:click={() => selectThing(choice.id)}

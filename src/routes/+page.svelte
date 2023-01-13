@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Logo from '../assets/logo.svg';
 	import { fade } from 'svelte/transition';
-	import  PageLayout  from '../components/PageLayout.svelte';
+	import PageLayout from '../components/PageLayout.svelte';
 
 	const choices = [
 		{ id: 0, href: '/sixth-grade', title: 'Sechste Klasse', large: '6', active: true },
@@ -31,7 +31,7 @@
 	<div class="flex flex-col sm:flex-row gap-4 mt-12 w-full">
 		{#each choices as choice}
 			<button
-				class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
+				class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center items-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
 				disabled={!choice.active}
 				on:click={() => selectThing(choice.id)}
 			>
