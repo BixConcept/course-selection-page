@@ -3,10 +3,13 @@
 	import { fade } from 'svelte/transition';
 
 	const choices = [
-		{ id: 0, title: 'Latein', large: '📜', active: true },
-		{ id: 1, title: 'Französisch', large: '🇫🇷', active: true }
+		{ id: 0, title: 'Informatik', large: '🧑‍💻', active: true },
+		{ id: 1, title: 'Ökologie', large: '🌱', active: true },
+		{ id: 2, title: 'Cultural Studies', large: '🇺🇸', active: true },
+		{ id: 3, title: 'Spanisch', large: '🇪🇸', active: true },
+		{ id: 4, title: 'Französisch', large: '🇫🇷', active: true }
 		/* { id: 2, title: 'Oberstufe', large: 'S2', active: false } */
-	];
+	].sort((a, b) => a.title.localeCompare(b.title));
 
 	$: idError = id !== null && id < 1000;
 	$: birthDateError = birthDate !== null && new Date().getTime() < new Date(birthDate).getTime();
@@ -23,7 +26,7 @@
 		}
 	}
 
-	$: submitEnabled = id && birthDate && !(idError || birthDateError);
+	$: submitEnabled = id && birthDate && selected !== null && !(idError || birthDateError);
 
 	function submit() {
 		if (!submitEnabled) return;
@@ -34,22 +37,22 @@
 </script>
 
 <svelte:head>
-	<title>Kurswahlen 6. Klasse</title>
+	<title>Kurswahlen 9. Klasse</title>
 </svelte:head>
 
 <main class="flex flex-col items-center w-screen min-h-screen bg-zinc-100 px-8 gap-4" transition:fade>
-		<a class="block mt-4">
-			<div class="flex items-center gap-2">
-				<div class="w-8 h-8 text-gray-600">
-					<img src={Logo} alt="Gymhaan Logo" />
-				</div>
-				<h1 class="uppercase text-gray-600 ">Gymnasium Haan</h1>
+	<a class="block text-center mt-4" href="/">
+		<div class="flex items-center gap-2">
+			<div class="w-8 h-8 text-gray-600">
+				<img src={Logo} alt="Gymhaan Logo" />
 			</div>
-		</a>
+			<h1 class="uppercase text-gray-600 ">Gymnasium Haan</h1>
+		</div>
+	</a>
 	<div
 		class="p-12 w-[min(800px,90vw)] drop-shadow-2xl bg-white flex items-center justify-center flex-col rounded-2xl my-auto"
 	>
-		<h1 class="text-center text-4xl text-indigo-600">6. Klasse</h1>
+		<h1 class="text-center text-4xl text-indigo-600">9. Klasse</h1>
 		<h2 class="text-center text-gray-500">Städtisches Gymnasium Haan</h2>
 		<form
 			on:submit={(e) => {
@@ -85,16 +88,16 @@
 			</div>
 		</form>
 
-		<div class="flex flex-col sm:flex-row gap-4 mt-12 w-full">
+		<div class="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-12 w-full">
 			{#each choices as choice}
 				<button
-					class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
+					class="shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out "
 					disabled={!choice.active}
 					class:ring-4={selected == choice.id}
 					on:click={() => selectThing(choice.id)}
 				>
 					<h2
-						class="flex-1 text-7xl font-bold "
+						class="flex-1 text-7xl"
 						class:text-indigo-600={choice.active}
 						class:text-gray-600={!choice.active}
 					>
@@ -111,7 +114,7 @@
 			{/each}
 		</div>
 		<button
-			class="mt-8 enabled:bg-indigo-500 bg-gray-400 text-gray-100 px-8 py-2 font-bold uppercase rounded-md"
+			class="mt-8 enabled:bg-indigo-500 bg-gray-400 text-gray-100 px-8 py-2 font-bold uppercase rounded-md transition-all ease-in-out"
 			disabled={!submitEnabled}
 			on:click={submit}>Abschicken</button
 		>

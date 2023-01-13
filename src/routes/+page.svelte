@@ -1,25 +1,33 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Logo from '../assets/logo.svg';
+	import { fade } from 'svelte/transition';
 
 	const choices = [
 		{ id: 0, href: '/sixth-grade', title: 'Sechste Klasse', large: '6', active: true },
-		{ id: 1, href: '/ninth-grade', title: 'Neunte Klasse', large: '9', active: false },
-		/* { id: 2, title: 'Oberstufe', large: 'S2', active: false } */
+		{ id: 1, href: '/ninth-grade', title: 'Neunte Klasse', large: '9', active: true },
+		{ id: 2, title: 'Oberstufe', large: 'S2', active: false, href: null }
 	];
 
 	let selected: number | null = null;
 
 	function selectThing(choice: number) {
-		const filtered = choices.filter((x) => x.id == choice);
+		const filtered = choices.filter((x) => x.id == choice && x.active);
 		if (filtered && filtered[0].active) {
 			selected = choice;
-			goto(filtered[0].href);
+			goto(filtered[0].href as string);
 		}
 	}
 </script>
 
-<main class="flex flex-col justify-center items-center w-screen h-screen bg-zinc-100 px-8">
+<svelte:head>
+	<title>Kurswahlen Gymhaan</title>
+</svelte:head>
+
+<main
+	class="flex flex-col justify-center items-center w-screen h-screen bg-zinc-100 px-8"
+	transition:fade
+>
 	<div class="flex absolute top-4 items-center gap-2">
 		<div class="w-8 h-8 text-gray-600">
 			<img src={Logo} alt="Gymhaan Logo" />
@@ -58,4 +66,3 @@
 		<p class="mt-16 text-gray-500 font-light">© Nia Schlegel 2023, AGPLv3</p>
 	</div>
 </main>
-
