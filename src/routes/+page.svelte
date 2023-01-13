@@ -5,7 +5,7 @@
 	import PageLayout from '../components/PageLayout.svelte';
 
 	const choices = [
-		{ id: 0, href: '/sixth-grade', title: 'Sechste Klasse', large: '6', active: true },
+		{ id: 0, href: '/seventh-grade', title: 'Siebte Klase', large: '7', active: true },
 		{ id: 1, href: '/ninth-grade', title: 'Neunte Klasse', large: '9', active: true },
 		{ id: 2, title: 'Oberstufe', large: 'S2', active: false, href: null }
 	];

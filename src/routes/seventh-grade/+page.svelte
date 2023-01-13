@@ -36,7 +36,7 @@
 </svelte:head>
 
 <PageLayout>
-	<h1 class="text-center text-4xl text-indigo-600">6. Klasse</h1>
+	<h1 class="text-center text-4xl text-indigo-600">7. Klasse</h1>
 	<h2 class="text-center text-gray-500">Städtisches Gymnasium Haan</h2>
 	<form
 		on:submit={(e) => {
