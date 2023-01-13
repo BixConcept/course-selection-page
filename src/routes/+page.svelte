@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Logo from '../assets/logo.svg';
 	import { fade } from 'svelte/transition';
+	import  PageLayout  from '../components/PageLayout.svelte';
 
 	const choices = [
 		{ id: 0, href: '/sixth-grade', title: 'Sechste Klasse', large: '6', active: true },
@@ -24,45 +25,31 @@
 	<title>Kurswahlen Gymhaan</title>
 </svelte:head>
 
-<main
-	class="flex flex-col justify-center items-center w-screen h-screen bg-zinc-100 px-8"
-	transition:fade
->
-	<div class="flex absolute top-4 items-center gap-2">
-		<div class="w-8 h-8 text-gray-600">
-			<img src={Logo} alt="Gymhaan Logo" />
-		</div>
-		<h1 class="uppercase text-gray-600 ">Gymnasium Haan</h1>
-	</div>
-	<div
-		class="p-12 w-[min(800px,90vw)] drop-shadow-2xl bg-white flex items-center justify-center flex-col rounded-2xl "
-	>
-		<h1 class="text-center text-4xl text-indigo-600">Kurswahlen</h1>
-		<h2 class="text-center text-gray-500">Städtisches Gymnasium Haan</h2>
-		<div class="flex flex-col sm:flex-row gap-4 mt-12 w-full">
-			{#each choices as choice}
-				<button
-					class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
-					disabled={!choice.active}
-					on:click={() => selectThing(choice.id)}
+<PageLayout>
+	<h1 class="text-center text-4xl text-indigo-600">Kurswahlen</h1>
+	<h2 class="text-center text-gray-500">Städtisches Gymnasium Haan</h2>
+	<div class="flex flex-col sm:flex-row gap-4 mt-12 w-full">
+		{#each choices as choice}
+			<button
+				class="flex-1 w-full sm:w-auto shadow-lg rounded-md flex flex-col justify-center p-8 h-[250px] ring-indigo-600 active:ring-2 transition-all ease-in-out"
+				disabled={!choice.active}
+				on:click={() => selectThing(choice.id)}
+			>
+				<h2
+					class="flex-1 text-7xl font-bold "
+					class:text-indigo-600={choice.active}
+					class:text-gray-600={!choice.active}
 				>
-					<h2
-						class="flex-1 text-7xl font-bold "
-						class:text-indigo-600={choice.active}
-						class:text-gray-600={!choice.active}
-					>
-						{choice.large}
-					</h2>
-					<h3
-						class="mt-12 text-center text-lg"
-						class:text-indigo-600={choice.active}
-						class:text-gray-600={!choice.active}
-					>
-						{choice.title}
-					</h3>
-				</button>
-			{/each}
-		</div>
-		<p class="mt-16 text-gray-500 font-light">© Nia Schlegel 2023, AGPLv3</p>
+					{choice.large}
+				</h2>
+				<h3
+					class="mt-12 text-center text-lg"
+					class:text-indigo-600={choice.active}
+					class:text-gray-600={!choice.active}
+				>
+					{choice.title}
+				</h3>
+			</button>
+		{/each}
 	</div>
-</main>
+</PageLayout>
