@@ -31,7 +31,15 @@
 
 	function submit() {
 		if (!submitEnabled) return;
-		alert('TODO');
+
+		await fetch("examples.com/api/ninth-grade", {
+			method: "POST",
+			body: JSON.stringify({
+				id,
+				birthDate,
+				selected
+			})
+		});
 	}
 </script>
 

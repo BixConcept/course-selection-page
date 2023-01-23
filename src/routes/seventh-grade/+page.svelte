@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Logo from '../../assets/logo.svg';
-	import { fade } from 'svelte/transition';
 	import PageLayout from '../../components/PageLayout.svelte';
 
 	const choices = [
@@ -25,9 +23,18 @@
 
 	$: submitEnabled = id && birthDate && !(idError || birthDateError);
 
-	function submit() {
+	async function submit() {
 		if (!submitEnabled) return;
-		alert('TODO');
+
+		await fetch("examples.com/api/seventh-grade", {
+			method: "POST",
+			body: JSON.stringify({
+				id,
+				birthDate,
+				selected
+			})
+		});
+
 	}
 </script>
 
