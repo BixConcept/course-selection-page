@@ -29,7 +29,7 @@
 
 	$: submitEnabled = id && birthDate && selected !== null && !(idError || birthDateError);
 
-	function submit() {
+	async function submit() {
 		if (!submitEnabled) return;
 
 		await fetch("examples.com/api/ninth-grade", {
