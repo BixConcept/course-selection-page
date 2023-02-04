@@ -28,19 +28,32 @@
   async function submit() {
     if (!submitEnabled) return;
 
-	// send fetch request with form data as www-form-urlencoded
-	const res = await fetch("https://rz.gymhaan.de/q2/json/jsontest_post.php", {
-	  method: "POST",
-	  body: new URLSearchParams({
-		request: JSON.stringify({id: id.toString()})
-	  })
-	});
+    // send fetch request with form data as www-form-urlencoded
+    // this is pretty fucking weird
+    const res = await fetch('https://rz.gymhaan.de/q2/json/jsontest_post.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        request: JSON.stringify({ id: id?.toString() })
+      })
+    });
 
-	console.log(res);
+    // this would be good
+    const _res = await fetch('https://rz.gymhaan.de/q2/json/urltest_post.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: id?.toString() })
+    });
 
-	// get response as json
-	const json = await res.json();
-	console.log(json);
+    console.log(res);
+
+    // get response as json
+    const json = await res.json();
+    console.log(json);
   }
 </script>
 
