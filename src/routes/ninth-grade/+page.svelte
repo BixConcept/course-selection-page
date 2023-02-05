@@ -29,18 +29,36 @@
 
 	$: submitEnabled = id && birthDate && selected !== null && !(idError || birthDateError);
 
-	async function submit() {
-		if (!submitEnabled) return;
+  async function submit() {
+    if (!submitEnabled) return;
 
-		await fetch("examples.com/api/ninth-grade", {
-			method: "POST",
-			body: JSON.stringify({
-				id,
-				birthDate,
-				selected
-			})
-		});
-	}
+    // send fetch request with form data as www-form-urlencoded
+    // this is pretty fucking weird
+    const res = await fetch('https://rz.gymhaan.de/q2/json/jsontest_post.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        request: JSON.stringify({ id: id?.toString() })
+      })
+    });
+
+    // this would be good
+    const _res = await fetch('https://rz.gymhaan.de/q2/json/urltest_post.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: id?.toString() })
+    });
+
+    console.log(res);
+
+    // get response as json
+    const json = await res.json();
+    console.log(json);
+  }
 </script>
 
 <svelte:head>

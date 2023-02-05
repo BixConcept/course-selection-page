@@ -28,6 +28,8 @@
   async function submit() {
     if (!submitEnabled) return;
 
+	// TODO: send *useful* data
+
     // send fetch request with form data as www-form-urlencoded
     // this is pretty fucking weird
     const res = await fetch('https://rz.gymhaan.de/q2/json/jsontest_post.php', {
